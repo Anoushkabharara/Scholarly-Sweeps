@@ -10,8 +10,6 @@ demo with real accounts, a cleaner marketplace, and a booking flow.
 > This is a demo. Bookings are simulated — no payment is processed and no
 > cleaner is actually dispatched.
 
----
-
 ## The product
 
 Scholarly Sweeps matches UTD students with a nearby, rated cleaner for their
@@ -28,8 +26,6 @@ ranked by how many students said they wanted them.
 
 Accounts are real — signup and login with bcrypt-hashed passwords and signed
 session cookies, plus an account page showing your booking history.
-
----
 
 ## The research
 
@@ -50,8 +46,6 @@ on UTD's own student population:
 The original deliverable was a static pitch deck and a spreadsheet financial
 model. This project turns that research into an actual product.
 
----
-
 ## From insight to decision
 
 Every product decision in the app ties back to a specific finding, not just
@@ -65,8 +59,6 @@ intuition:
 | Laundry requested by 61% of students, next-highest add-on at 43.9% | Laundry ships first as an add-on; low-demand items (carpet cleaning, eco-friendly options, ~2% each) were cut from scope entirely |
 | Students wanted clarity on what a "clean" actually includes | Added expandable "See what's included" on every package card, and a dedicated inclusions list inside the booking flow before add-ons are even shown |
 | Competitor pricing is per-unit (whole apartment), not per-room | Positioned Scholarly Sweeps as a per-room service — the point of difference is a smaller, cheaper unit of service, not a discount on the same thing |
-
----
 
 ## How this was built
 
@@ -95,16 +87,17 @@ scholarly-sweeps/
 │   ├── index.js         routes: /api/packages, /api/addons, /api/cleaners,
 │   │                    /api/survey, /api/bookings, /api/auth/*
 │   ├── db.js             JSON-file-backed users + bookings store
-│   └── data/.json       reference data, including the real survey stats
+│   └── data/*.json       reference data, including the real survey stats
 └── client/          Next.js 14 (App Router)
-├── app/page.js          landing page
-├── app/login/           login
-├── app/signup/          signup
-├── app/account/         profile + booking history
-├── app/book/            8-step marketplace booking flow
-├── app/dashboard/       research → decision → roadmap case study
-├── components/AuthContext.js   shared auth state
-└── next.config.js       proxies /api/ to the Express server
+    ├── app/page.js          landing page
+    ├── app/login/           login
+    ├── app/signup/          signup
+    ├── app/account/         profile + booking history
+    ├── app/book/            8-step marketplace booking flow
+    ├── app/dashboard/       research → decision → roadmap case study
+    ├── components/AuthContext.js   shared auth state
+    └── next.config.js       proxies /api/* to the Express server
+    
 **A deliberate tradeoff:** user accounts and bookings are stored in flat
 JSON files rather than a SQL database. SQLite was tried first but requires
 native compilation that's flaky across hosting environments; a real SQL
@@ -115,8 +108,6 @@ the known limitation is that this data resets if the API server redeploys.
 **Deployed on:**
 - **Vercel** — the Next.js frontend
 - **Railway** — the Express API
-
----
 
 ## Run it locally
 
@@ -145,8 +136,6 @@ Visit `http://localhost:3000`.
 - **Frontend → Vercel**: root directory `client`. Environment variable:
   - `NEXT_PUBLIC_API_ORIGIN` → your deployed API URL
 
----
-
 ## What's next
 
 Prioritized using the same research this project is built on:
@@ -156,8 +145,6 @@ Prioritized using the same research this project is built on:
   identified in the pricing survey, without touching the $25 anchor price
 - **Later** — a direct partnership with UTD housing for distribution at
   move-in, the single highest-intent moment for this audience
-
----
 
 ## Skills this project demonstrates
 
