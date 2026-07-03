@@ -1,76 +1,124 @@
-# Scholarly Sweeps — Product Case Study (Wireframe)
+# Scholarly Sweeps
 
-A working demo booking flow + product dashboard for a UTD dorm/apartment cleaning
-service, built as a technical PM/APM portfolio piece. Based on original market
-research from a Marketing 3300 Honors group project (survey of 56 UTD students,
-competitor analysis, pricing tests).
+A dorm-cleaning marketplace for UTD students, built as an end-to-end product
+case study: real survey research → product decisions → a working full-stack
+demo with real accounts, a cleaner marketplace, and a booking flow.
 
-**This is a wireframe** — deliberately low-fidelity (grayscale, dashed borders) so the
-flow and data model are the focus. Visual design is the next pass.
+**Live demo:** https://scholarly-sweeps.vercel.app
+**Stack:** Next.js 14 (App Router) · Express · JWT auth · bcrypt
 
-No real payments are processed and no cleaner is dispatched. Bookings are stored
-in-memory on the API and reset on server restart.
+> This is a demo. Bookings are simulated — no payment is processed and no
+> cleaner is actually dispatched.
 
-## What this demonstrates
+---
 
-- **Product thinking**: every chart on `/dashboard` is tied to a specific decision
-  (pricing tier, add-on prioritization, marketing angle), not just a stat.
-- **Technical fluency**: a real REST API (Express) consumed by a real frontend
-  (Next.js App Router), not a static mockup — you can actually complete a booking.
-- **Real auth**: signup/login with bcrypt-hashed passwords and signed JWT session
-  cookies — not a fake "logged in" toggle.
-- **Data-driven roadmap**: add-on demand percentages and pricing sensitivity data
-  directly drive the "Now / Next / Later" roadmap on the dashboard.
+## The product
 
-## Auth
+Scholarly Sweeps matches UTD students with a nearby, rated cleaner for their
+dorm room, on a schedule that works for both sides. The booking flow is a
+real marketplace, not a single-vendor checkout:
 
-- Passwords are hashed with bcrypt, never stored in plaintext.
-- Sessions are a signed JWT stored in an httpOnly cookie (not readable by JS,
-  not vulnerable to basic XSS token theft).
-- User accounts and bookings are stored in flat JSON files
-  (`server/data/users.json`, `server/data/bookings.json`) rather than a SQL
-  database — this avoids native-module build issues across different hosting
-  environments. **Known limitation**: on most hosting platforms (including
-  Railway's default filesystem) these files reset on redeploy, since the
-  filesystem isn't persistent. Fine for a demo/portfolio piece; swap in
-  Postgres or MongoDB Atlas if you want accounts to survive redeploys.
+**Location → Cleaning type → Choose a cleaner → Supplies & notes → Add-ons →
+Schedule → Checkout → Confirmed**
 
-## Booking flow
+Along the way: package cards show exactly what's included before you commit
+to extras, cleaners are shown with star ratings and review counts, the
+calendar only offers days that cleaner actually works, and add-ons are
+ranked by how many students said they wanted them.
 
-The `/book` flow is a marketplace, not a single-vendor checkout:
+Accounts are real — signup and login with bcrypt-hashed passwords and signed
+session cookies, plus an account page showing your booking history.
 
-1. **Location** — dorm address (free text)
-2. **Cleaning type** — Standard / Deep / Move-Out, dorm-only pricing
-3. **Choose a cleaner** — name, star rating, review count, whether they bring supplies
-4. **Supplies & notes** — who brings supplies (+$5 if the cleaner does), free-text notes
-5. **Add-ons** — shows what's included in the chosen package first, then optional
-   extras (laundry, window cleaning, dishes, organizing) ranked by survey demand
-6. **Schedule** — a 14-day calendar filtered to the selected cleaner's actual
-   availability, then time slots
-7. **Checkout** — name/phone/email (prefilled if logged in), full order summary, total
-8. **Confirmed** — booking code from the API
+---
 
-## Architecture
+## The research
 
-```
+This started as a Marketing 3300 Honors group project, with primary research
+on UTD's own student population:
+
+- **56 survey respondents** (89.7% freshmen, 78.9% living in dorms)
+- **47.3%** cited lack of time to clean as their top reason to hire a service
+- **32.2%** wanted more thorough cleaning than they do themselves
+- **69%** of respondents were unemployed with **$0–$100/month** disposable income
+- **61%** wanted laundry as an add-on service — by far the most requested
+- Competitor benchmarking against a local service (North Texas Cowboy
+  Cleaners), which charges $115+/week for a full apartment — this project's
+  per-room pricing model ($25–35/mo) targets a different unit of service
+  entirely, not just a discount on the same offering
+- Open-ended feedback was blunt: "lower your prices"
+
+The original deliverable was a static pitch deck and a spreadsheet financial
+model. This project turns that research into an actual product.
+
+---
+
+## From insight to decision
+
+Every product decision in the app ties back to a specific finding, not just
+intuition:
+
+| Finding | Decision |
+|---|---|
+| 47.3% cite lack of time (vs. 32.2% wanting a better clean) | Landing page hero leads with time saved, not cleaning quality |
+| 89.7% of interested respondents are freshmen | Copy and "how it works" section written for someone booking their *first* cleaning service, not a repeat customer |
+| Pricing responses split hard between "too expensive" and "willing to pay" | Kept $25/mo as the anchor price instead of discounting it — added a separate promo tier for the price-sensitive segment (see roadmap) rather than eroding the whole product's margin |
+| Laundry requested by 61% of students, next-highest add-on at 43.9% | Laundry ships first as an add-on; low-demand items (carpet cleaning, eco-friendly options, ~2% each) were cut from scope entirely |
+| Students wanted clarity on what a "clean" actually includes | Added expandable "See what's included" on every package card, and a dedicated inclusions list inside the booking flow before add-ons are even shown |
+| Competitor pricing is per-unit (whole apartment), not per-room | Positioned Scholarly Sweeps as a per-room service — the point of difference is a smaller, cheaper unit of service, not a discount on the same thing |
+
+---
+
+## How this was built
+
+The project went through several real iterations rather than one shot:
+
+1. **Wireframe pass** — a deliberately low-fidelity, gray-box version of the
+   booking flow and dashboard, built first to validate the flow and data
+   model before investing in visual design.
+2. **Marketplace booking flow** — expanded from a simple "pick a package and
+   pay" flow into a real marketplace: address entry, cleaner selection with
+   ratings, supply negotiation, availability-aware scheduling, and a proper
+   checkout.
+3. **Real authentication** — signup/login with bcrypt password hashing and
+   signed JWT session cookies, plus a booking history tied to the logged-in
+   account.
+4. **Visual design pass** — a full pastel-blue design system (chosen to
+   evoke cleanliness), custom mop-icon logo, and a serif/sans type pairing
+   (Fraunces + Plus Jakarta Sans), replacing the initial wireframe styling.
+5. **Product dashboard** — a separate `/dashboard` view that turns the
+   original survey data into charts, each paired with the decision it
+   drove — the "why," not just the "what."
+
+### Architecture
 scholarly-sweeps/
 ├── server/          Express REST API (Node.js)
 │   ├── index.js         routes: /api/packages, /api/addons, /api/cleaners,
 │   │                    /api/survey, /api/bookings, /api/auth/*
 │   ├── db.js             JSON-file-backed users + bookings store
-│   └── data/*.json       mock reference data + generated user/booking data
+│   └── data/.json       reference data, including the real survey stats
 └── client/          Next.js 14 (App Router)
-    ├── app/page.js          landing page
-    ├── app/login/page.js    login
-    ├── app/signup/page.js   signup
-    ├── app/account/page.js  profile + booking history
-    ├── app/book/page.js     8-step marketplace booking flow (the working prototype)
-    ├── app/dashboard/page.js  PM case study: research → decision → roadmap
-    ├── components/AuthContext.js  shared auth state
-    └── next.config.js       proxies /api/* to the Express server
-```
+├── app/page.js          landing page
+├── app/login/           login
+├── app/signup/          signup
+├── app/account/         profile + booking history
+├── app/book/            8-step marketplace booking flow
+├── app/dashboard/       research → decision → roadmap case study
+├── components/AuthContext.js   shared auth state
+└── next.config.js       proxies /api/ to the Express server
+**A deliberate tradeoff:** user accounts and bookings are stored in flat
+JSON files rather than a SQL database. SQLite was tried first but requires
+native compilation that's flaky across hosting environments; a real SQL
+database (Postgres) would need a separately hosted instance. For a
+portfolio demo, a dependency-free JSON store is the more reliable choice —
+the known limitation is that this data resets if the API server redeploys.
 
-## Run locally
+**Deployed on:**
+- **Vercel** — the Next.js frontend
+- **Railway** — the Express API
+
+---
+
+## Run it locally
 
 Two terminals:
 
@@ -78,31 +126,45 @@ Two terminals:
 # Terminal 1 — API
 cd server
 npm install
-npm run dev        # runs on http://localhost:4000
+npm run dev        # http://localhost:4000
 
 # Terminal 2 — frontend
 cd client
 npm install
-npm run dev         # runs on http://localhost:3000
+npm run dev         # http://localhost:3000
 ```
 
 Visit `http://localhost:3000`.
 
 ## Deploy
 
-- **API → Railway or Render**: point it at the `server/` folder, it just needs
-  `npm install && npm start`. Set environment variables:
-  - `JWT_SECRET` — any long random string (used to sign session cookies)
-  - `FRONTEND_ORIGIN` — your deployed frontend URL (e.g. `https://scholarly-sweeps.vercel.app`)
-  - `NODE_ENV=production`
-  Note the deployed API URL once it's live.
-- **Frontend → Vercel**: import the `client/` folder as the project root, and set
-  the environment variable `NEXT_PUBLIC_API_ORIGIN` to your deployed API URL.
+- **API → Railway**: root directory `server`. Environment variables:
+  - `JWT_SECRET` — any long random string
+  - `NODE_ENV` → `production`
+  - `FRONTEND_ORIGIN` → your deployed frontend URL
+- **Frontend → Vercel**: root directory `client`. Environment variable:
+  - `NEXT_PUBLIC_API_ORIGIN` → your deployed API URL
 
-## Roadmap for the next pass
+---
 
-1. Real visual design (this repo is intentionally wireframe-only for now).
-2. Persist bookings in a real database (Postgres/Mongo) instead of in-memory.
-3. Auth (so "my bookings" is real per user).
-4. A PRD.md alongside this README, formalizing the requirements this prototype
-   is testing.
+## What's next
+
+Prioritized using the same research this project is built on:
+
+- **Now** — cleaner marketplace + add-ons (shipped in this demo)
+- **Next** — a discounted promo pricing tier for the price-sensitive segment
+  identified in the pricing survey, without touching the $25 anchor price
+- **Later** — a direct partnership with UTD housing for distribution at
+  move-in, the single highest-intent moment for this audience
+
+---
+
+## Skills this project demonstrates
+
+- Translating primary research (a real 56-respondent survey) into specific,
+  defensible product decisions
+- Designing and building a full marketplace flow, not just a checkout form
+- Real authentication (bcrypt, JWT sessions) — not a fake "logged in" toggle
+- Full-stack ownership: REST API design, frontend state management, and
+  production deployment across two separate platforms
+- Visual design system work: palette, typography, and component design
