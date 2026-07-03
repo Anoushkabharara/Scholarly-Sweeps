@@ -1,0 +1,7 @@
+[
+  { "id": "laundry", "name": "Laundry Service", "price": 10, "demandPct": 61 },
+  { "id": "window", "name": "Window Cleaning", "price": 8, "demandPct": 43.9 },
+  { "id": "dishes", "name": "Dish Duty", "price": 6, "demandPct": 43.9 },
+  { "id": "organizing", "name": "Organizing", "price": 12, "demandPct": 39 },
+  { "id": "eco", "name": "Eco-Friendly Products", "price": 5, "demandPct": 2.4 }
+]

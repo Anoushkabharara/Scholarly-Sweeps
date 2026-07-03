@@ -1,0 +1,40 @@
+[
+  {
+    "id": "standard",
+    "name": "Standard Clean",
+    "description": "Weekly tidy-up.",
+    "price": 25,
+    "unit": "per month",
+    "included": [
+      "Floors vacuumed and mopped",
+      "Surfaces wiped down",
+      "Trash taken out",
+      "Bathroom wipe-down"
+    ]
+  },
+  {
+    "id": "deep",
+    "name": "Deep Clean",
+    "description": "One-time thorough clean.",
+    "price": 45,
+    "unit": "one-time",
+    "included": [
+      "Everything in Standard Clean",
+      "Baseboards and vents",
+      "Appliance exteriors",
+      "Full bathroom and kitchen detail"
+    ]
+  },
+  {
+    "id": "move-out",
+    "name": "Move-Out Clean",
+    "description": "End-of-semester deep clean for move-out inspections.",
+    "price": 55,
+    "unit": "one-time",
+    "included": [
+      "Everything in Deep Clean",
+      "Move-out inspection checklist",
+      "Closet and cabinet interiors"
+    ]
+  }
+]

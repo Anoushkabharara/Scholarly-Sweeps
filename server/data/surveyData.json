@@ -1,0 +1,103 @@
+{
+  "respondents": 56,
+  "gender": [
+    { "label": "Women", "value": 58.6 },
+    { "label": "Men", "value": 39.7 },
+    { "label": "Other", "value": 1.7 }
+  ],
+  "classYear": [
+    { "label": "Freshman", "value": 89.7 },
+    { "label": "Junior", "value": 8.6 },
+    { "label": "Senior", "value": 1.7 }
+  ],
+  "housing": [
+    { "label": "Dorm", "value": 78.9 },
+    { "label": "Apartment", "value": 21.1 }
+  ],
+  "employment": [
+    { "label": "Unemployed", "value": 69 },
+    { "label": "Employed", "value": 31 }
+  ],
+  "disposableIncome": [
+    { "label": "$0-$100", "value": 51 },
+    { "label": "$100-$299", "value": 22 },
+    { "label": "$300-$599", "value": 15 },
+    { "label": "$600-$999", "value": 8 },
+    { "label": "$1,000+", "value": 4 }
+  ],
+  "reasonsToHire": [
+    { "label": "Lack of time to clean", "value": 47.3 },
+    { "label": "Desire for more thorough cleaning", "value": 32.2 },
+    { "label": "Difficulty maintaining cleanliness", "value": 20.5 }
+  ],
+  "socialPlatforms": [
+    { "label": "Instagram", "value": 93.1 },
+    { "label": "YouTube", "value": 74.1 },
+    { "label": "TikTok", "value": 50 },
+    { "label": "Snapchat", "value": 48.3 },
+    { "label": "X (Twitter)", "value": 17.2 },
+    { "label": "Reddit", "value": 22.4 },
+    { "label": "Facebook", "value": 3.4 }
+  ],
+  "addonDemand": [
+    { "label": "Laundry service", "value": 61 },
+    { "label": "Window cleaning", "value": 43.9 },
+    { "label": "Dishes", "value": 43.9 },
+    { "label": "Organizing", "value": 39 },
+    { "label": "Carpet cleaning", "value": 2.4 },
+    { "label": "Eco-friendly options", "value": 2.4 }
+  ],
+  "pricingWillingness": {
+    "question": "Willingness to pay $25/month for dorm room cleaning (1-10 scale)",
+    "responses": 48,
+    "distribution": [
+      { "score": 1, "count": 9 },
+      { "score": 2, "count": 4 },
+      { "score": 3, "count": 3 },
+      { "score": 4, "count": 3 },
+      { "score": 5, "count": 7 },
+      { "score": 6, "count": 3 },
+      { "score": 7, "count": 4 },
+      { "score": 8, "count": 5 },
+      { "score": 9, "count": 3 },
+      { "score": 10, "count": 7 }
+    ],
+    "customerFeedback": "Lower your prices — suggested range $15-$25/month for dorm cleaning, or free service subsidized by the university."
+  },
+  "recommendLikelihood": {
+    "question": "How likely are you to recommend this service to other students? (0-10 NPS-style)",
+    "responses": 58,
+    "distribution": [
+      { "score": 1, "count": 5 },
+      { "score": 2, "count": 2 },
+      { "score": 3, "count": 2 },
+      { "score": 4, "count": 2 },
+      { "score": 5, "count": 8 },
+      { "score": 6, "count": 8 },
+      { "score": 7, "count": 6 },
+      { "score": 8, "count": 7 },
+      { "score": 9, "count": 4 },
+      { "score": 10, "count": 11 }
+    ]
+  },
+  "competitorPricing": [
+    { "service": "Deluxe Deep Clean (one-time, full dorm)", "low": 288, "high": 384 },
+    { "service": "Basic Spring Cleaning (one-time, full dorm)", "low": 220, "high": 330 },
+    { "service": "Bi-Weekly Cleaning", "low": 125, "high": 125 },
+    { "service": "Weekly Cleaning", "low": 115, "high": 115 }
+  ],
+  "monthlyFinancials": [
+    { "month": "May", "sales": 80, "revenue": 2000, "mktExpense": 200, "profit": 400 },
+    { "month": "Jun", "sales": 90, "revenue": 2250, "mktExpense": 225, "profit": 450 },
+    { "month": "Jul", "sales": 100, "revenue": 2500, "mktExpense": 250, "profit": 500 },
+    { "month": "Aug", "sales": 1800, "revenue": 45000, "mktExpense": 4500, "profit": 9000 },
+    { "month": "Sep", "sales": 1500, "revenue": 37500, "mktExpense": 3750, "profit": 7500 },
+    { "month": "Oct", "sales": 1600, "revenue": 40000, "mktExpense": 4000, "profit": 8000 },
+    { "month": "Nov", "sales": 2100, "revenue": 52500, "mktExpense": 5250, "profit": 10500 },
+    { "month": "Dec", "sales": 1000, "revenue": 25000, "mktExpense": 2500, "profit": 5000 },
+    { "month": "Jan", "sales": 150, "revenue": 3750, "mktExpense": 375, "profit": 750 },
+    { "month": "Feb", "sales": 4000, "revenue": 100000, "mktExpense": 10000, "profit": 20000 },
+    { "month": "Mar", "sales": 3500, "revenue": 87500, "mktExpense": 8750, "profit": 17500 },
+    { "month": "Apr", "sales": 5000, "revenue": 125000, "mktExpense": 12500, "profit": 25000 }
+  ]
+}
